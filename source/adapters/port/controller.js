@@ -1,7 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { badRequest, ok, notFound, serverError } from '../helpers/http-helper'
+const {
+	badRequest,
+	ok,
+	notFound,
+	serverError,
+} = require('../helpers/http-helper')
 
-export class Controller {
+class Controller {
 	constructor(useCase) {
 		this.UseCase = useCase
 	}
@@ -29,4 +34,4 @@ export class Controller {
 	}
 }
 
-export default Controller
+module.exports = Controller
