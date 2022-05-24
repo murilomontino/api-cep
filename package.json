@@ -5,9 +5,8 @@
   "repository": "https://github.com/murilomontino/api-cep.git",
   "author": "murilomontino <murilomontinojr@hotmail.com>",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "start": "node source/index.js"
+    "start": "node source"
   },
   "dependencies": {
     "axios": "^0.27.2",
