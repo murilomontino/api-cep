@@ -16,7 +16,7 @@
  * @param {Error} error - Error object
  * @return {{ statusCode: 400, body: string }}
  */
-export const badRequest = (error) => ({
+const badRequest = (error) => ({
 	statusCode: 400,
 	body: error.message,
 })
@@ -25,7 +25,7 @@ export const badRequest = (error) => ({
  * @param {Error} error - Error object
  * @return {{ statusCode: 404, body: string }}
  */
-export const notFound = (error) => ({
+const notFound = (error) => ({
 	statusCode: 404,
 	body: error.message,
 })
@@ -34,7 +34,7 @@ export const notFound = (error) => ({
  * @param {...data} data - Data object
  * @return {{ statusCode: number, body: data }} - Response object
  */
-export const ok = (data) => ({
+const ok = (data) => ({
 	statusCode: 200,
 	body: data,
 })
@@ -43,7 +43,14 @@ export const ok = (data) => ({
  * @param {Error} error - Error object
  * @return {{ statusCode: 500, body: string }}
  */
-export const serverError = (error) => ({
+const serverError = (error) => ({
 	statusCode: 500,
 	body: error.message,
 })
+
+module.exports = {
+	badRequest,
+	notFound,
+	ok,
+	serverError,
+}
