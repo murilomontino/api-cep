@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { NextFunction, Request, Response } from 'express'
+const { NextFunction, Request, Response } = require('express')
 
-import { Controller } from '../../adapters/port/controller'
+const { Controller } = require('../../adapters/port/controller')
 
 /**
  * @param {Controller} controller - Controller object
  */
 
-export const ExpressNextRouteAdapter = (controller) => {
+const ExpressNextRouteAdapter = (controller) => {
 	/**
 	 * @param {Request} req - Request object
 	 * @param {Response} res - Response object
@@ -25,3 +25,5 @@ export const ExpressNextRouteAdapter = (controller) => {
 		return res.status(httpResponse.statusCode).json(httpResponse.body)
 	}
 }
+
+module.exports = ExpressNextRouteAdapter
