@@ -1,0 +1,23 @@
+{
+  "name": "api-cep",
+  "version": "1.0.0",
+  "main": "source/index.js",
+  "repository": "https://github.com/murilomontino/api-cep.git",
+  "author": "murilomontino <murilomontinojr@hotmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node source/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
+  }
+}
