@@ -1,21 +1,24 @@
 /* eslint-disable no-unused-vars */
 const { NextFunction, Request, Response } = require('express')
 
-const { Controller } = require('../../adapters/port/controller')
+const ControllerClass = require('../../adapters/port/controller')
 
-const { ExpressNextRouteAdapter } = require('../adapter/express-adapter-next')
+const ExpressNextRouteAdapter = require('../adapter/express-adapter-next')
 
-/**
- * @param {Controller} controller - Controller object
- */
+const ValidadeCEPUseCase = require('../../domain/use-cases/validate/validate-cep/validate-cep-use-case')
 
-const MiddlewareValidateCEP = (controller) => {
+const MiddlewareValidateCEP = () => {
 	/**
 	 * @param {Request} req - Request object
 	 * @param {Response} res - Response object
 	 * @param {NextFunction} next - Next function
 	 */
-	return ExpressNextRouteAdapter(controller)
+	return (req, res, next) => {
+		const ValidadeCEP = new ValidadeCEPUseCase()
+		const Controller = new ControllerClass(ValidadeCEP)
+
+		return ExpressNextRouteAdapter(Controller)(req, res, next)
+	}
 }
 
 module.exports = MiddlewareValidateCEP

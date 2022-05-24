@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const { NextFunction, Request, Response } = require('express')
 
-const { Controller } = require('../../adapters/port/controller')
+const Controller = require('../../adapters/port/controller')
 
 /**
  * @param {Controller} controller - Controller object
