@@ -1,0 +1,10 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "name": "Leanne Graham",
+            "username": "admin",
+            "password": "$2a$04$8RhMoTf1SwVScMWdmdpGr.oj1QVI1BYej8aujDO60VQvCNwbd04PO"
+        }
+    ]
+}
