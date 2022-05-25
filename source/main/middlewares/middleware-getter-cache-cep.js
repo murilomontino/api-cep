@@ -12,18 +12,15 @@ const MiddlewareGetterCacheCEP = () => {
 	 * @param {Response} res - Response object
 	 * @param {NextFunction} next - Next function
 	 */
-	return (req, res, next) => {
+	return async (req, res, next) => {
 		const params = { ...req.params, ...req.query }
+		const cep = params.cep || ''
 
-		const cep = params.cep
+		const value = await GetterCache.execute(cep)
 
-		const value = GetterCache.get(cep)
+		if (value.isRight()) return next()
 
-		if (value) {
-			return res.json(value).end()
-		}
-
-		next()
+		return res.json(value).end()
 	}
 }
 
