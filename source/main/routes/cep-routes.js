@@ -1,25 +1,23 @@
 const { Router } = require('express')
 
-const makeGetterCEPComposer = require('../composers/make-getter-cep-composer')
+const makeGetterCEPComposer = require('../composers/ceps-composers/make-getter-cep-composer')
 const expressRouteAdapter = require('../adapter/express-adapter')
+
+const middlewareEnsureAuthenticated = require('../middlewares/middleware-ensure-authenticated')
 const middlewareCache = require('../middlewares/middleware-getter-cache-cep')
+const middlewareValidadeCEP = require('../middlewares/middleware-validate-cep')
 
 const CEP = Router()
 
-// Objeto que contém todas as rotas de produtos
 const PathCEPs = {
 	CEP: '/cep*',
 }
 
-// Adiciona a rota /add-product para adicionar um produto
 CEP.post(
 	PathCEPs.CEP,
+	middlewareEnsureAuthenticated(),
 	middlewareCache(),
-	expressRouteAdapter(makeGetterCEPComposer())
-)
-CEP.get(
-	PathCEPs.CEP,
-	middlewareCache(),
+	middlewareValidadeCEP(),
 	expressRouteAdapter(makeGetterCEPComposer())
 )
 
