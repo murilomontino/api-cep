@@ -15,12 +15,7 @@ class Controller {
 		try {
 			const responseOrErr = await this.UseCase.execute(httpRequest)
 			if (responseOrErr.isRight()) {
-				switch (responseOrErr.value.statusCode) {
-					case 404:
-						return notFound(responseOrErr.value)
-					default:
-						return badRequest(responseOrErr.value)
-				}
+				return badRequest(responseOrErr.value)
 			}
 
 			return ok(responseOrErr.value)
