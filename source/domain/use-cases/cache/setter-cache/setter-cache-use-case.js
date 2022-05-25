@@ -12,7 +12,7 @@ class SetterCache {
 		const keyFormatted = key.replace(/"[^0-9a-zA-Z]/g, '')
 
 		try {
-			NodeCache.set(keyFormatted, value)
+			NodeCache.set(keyFormatted, value, 300)
 			return Either.Left(value)
 		} catch (error) {
 			return Either.Right(error)
