@@ -16,11 +16,11 @@ const MiddlewareGetterCacheCEP = () => {
 		const params = { ...req.params, ...req.query, ...req.body }
 		const cep = params.cep || ''
 
-		const value = await GetterCache.execute(cep)
+		const existsInCacheOrNo = await GetterCache.execute(cep)
 
-		if (value.isRight()) return next()
+		if (existsInCacheOrNo.isRight()) return next()
 
-		return res.json(value).end()
+		return res.json(existsInCacheOrNo.value).end()
 	}
 }
 

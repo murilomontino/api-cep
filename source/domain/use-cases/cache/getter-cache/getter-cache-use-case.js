@@ -13,7 +13,7 @@ class GetterCache {
 		const cache = await NodeCache.get(keyFormatted)
 
 		if (cache) {
-			return Either.Left(cache)
+			return Either.Left({ inCache: true, ...cache })
 		}
 
 		return Either.Right(null)

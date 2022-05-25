@@ -25,7 +25,7 @@ class GetterCEPUseCase {
 					return Either.Right(new NotFoundError())
 				}
 				SetterCache.execute(cep, data)
-				return Either.Left(data)
+				return Either.Left({ inCache: false, ...data })
 			})
 			.catch((error) => Either.Right(error))
 	}
