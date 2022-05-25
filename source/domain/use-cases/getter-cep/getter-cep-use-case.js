@@ -2,6 +2,7 @@ const axios = require('axios')
 const Either = require('../../../shared/either')
 const NotFoundError = require('../../../adapters/errors/not-found-cep')
 const SetterCache = require('../cache/setter-cache/setter-cache-use-case')
+
 const URL = 'https://viacep.com.br/ws/'
 
 class GetterCEPUseCase {
@@ -16,7 +17,7 @@ class GetterCEPUseCase {
 				if (data.erro) {
 					return Either.Right(new NotFoundError())
 				}
-				SetterCache.set(cep, data)
+				SetterCache.execute(cep, data)
 				return Either.Left(data)
 			})
 			.catch((error) => Either.Right(error))
