@@ -25,6 +25,9 @@ class Right {
 }
 
 class Either {
+	static typeLeft = new Left()
+	static typeRight = new Right()
+
 	static Left(value) {
 		return new Left(value)
 	}
