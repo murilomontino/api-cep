@@ -1,5 +1,13 @@
-import axios from 'axios'
+require('dotenv').config()
 
-axios.get('https://api.github.com/users/diego3g').then(function (response) {
-	console.log(response)
+const serverHTTP = require('./main/config/http')
+
+const port = process.env.PORT || 8000
+
+serverHTTP.listen(port, async () => {
+	console.log(`Mode: ${process.env.NODE_ENV || 'development'}`)
+	console.log(`Server listens: ${port}`)
+	console.log('====================================')
+	console.log('===========SERVIDOR ATIVO===========')
+	console.log('====================================')
 })
