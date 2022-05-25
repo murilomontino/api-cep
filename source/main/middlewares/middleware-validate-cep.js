@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 const { NextFunction, Request, Response } = require('express')
-
-const ControllerClass = require('../../adapters/port/controller')
-
-const ExpressNextRouteAdapter = require('../adapter/express-adapter-next')
+const InvalidCEP = require('../../adapters/errors/invalid-cep')
+const { badRequest } = require('../../adapters/helpers/http-helper')
 
 const ValidadeCEPUseCase = require('../../domain/use-cases/validate/validate-cep/validate-cep-use-case')
 
@@ -13,11 +11,18 @@ const MiddlewareValidateCEP = () => {
 	 * @param {Response} res - Response object
 	 * @param {NextFunction} next - Next function
 	 */
-	return (req, res, next) => {
-		const ValidadeCEP = new ValidadeCEPUseCase()
-		const Controller = new ControllerClass(ValidadeCEP)
+	return async (req, res, next) => {
+		const params = { ...req.params, ...req.query, ...req.body }
 
-		return ExpressNextRouteAdapter(Controller)(req, res, next)
+		const cep = params.cep || ''
+
+		const useCase = new ValidadeCEPUseCase()
+
+		const validadeCEP = await useCase.execute({ cep })
+
+		if (validadeCEP.isLeft()) return next()
+
+		return res.status(400).json(badRequest(new InvalidCEP())).end()
 	}
 }
 

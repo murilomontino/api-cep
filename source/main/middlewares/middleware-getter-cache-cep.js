@@ -13,7 +13,7 @@ const MiddlewareGetterCacheCEP = () => {
 	 * @param {NextFunction} next - Next function
 	 */
 	return async (req, res, next) => {
-		const params = { ...req.params, ...req.query }
+		const params = { ...req.params, ...req.query, ...req.body }
 		const cep = params.cep || ''
 
 		const value = await GetterCache.execute(cep)
