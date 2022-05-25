@@ -5,17 +5,21 @@ class ValidateCEPUseCase {
 	constructor() {}
 
 	/**
-	 * @param {string} cep
-	 * @return {Either<Error, Object>}
+	 * @param {{
+	 * 	cep: string
+	 * }} params
+	 * @return {Promise<Either.typeLeft | Either.typeRight>}
 	 */
 	async execute({ cep }) {
-		const regex = /^[0-9]{5}-[0-9]{3}$/
-		if (!regex.test(cep)) {
+		const cepFormatted = cep.replace(/[^0-9]/g, '')
+		const regex = /^[0-9]{8}$/
+
+		if (!regex.test(cepFormatted)) {
 			return Either.Right(new InvalidCEP())
 		}
 
 		return Either.Left({
-			message: 'CEP válido',
+			message: 'CEP Válido',
 		})
 	}
 }
