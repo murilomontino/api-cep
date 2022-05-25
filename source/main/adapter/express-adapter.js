@@ -7,19 +7,19 @@ const Controller = require('../../adapters/port/controller')
  * @param {Controller} controller - Controller object
  */
 
-const ExpressRouteAdapter = (controller) => {
+const expressRouteAdapter = (controller) => {
 	/**
 	 * @param {Request} req - Request object
 	 * @param {Response} res - Response object
 	 * @param {NextFunction} next - Next function
 	 */
 	return async (req, res) => {
-		const params = { ...req.params, ...req.query }
+		const params = { ...req.params, ...req.query, ...req.body }
 
 		const httpResponse = await controller.handle(params)
 
-		return res.status(httpResponse.statusCode).json(httpResponse.body)
+		return res.status(httpResponse.statusCode).json(httpResponse.body).end()
 	}
 }
 
-module.exports = ExpressRouteAdapter
+module.exports = expressRouteAdapter

@@ -13,11 +13,7 @@ class Controller {
 
 	async handle(httpRequest) {
 		try {
-			const responseOrErr = await this.UseCase.execute(
-				httpRequest.body,
-				httpRequest.params ?? {}
-			)
-
+			const responseOrErr = await this.UseCase.execute(httpRequest)
 			if (responseOrErr.isRight()) {
 				switch (responseOrErr.value.statusCode) {
 					case 404:
