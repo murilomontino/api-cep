@@ -8,6 +8,13 @@ const URL = 'https://viacep.com.br/ws/'
 class GetterCEPUseCase {
 	constructor() {}
 
+	/**
+	 * @param {{
+	 * cep: string
+	 * }} params
+	 * @return {Promise<Either.typeLeft | Either.typeRight>}
+	 * @throws {NotFoundError}
+	 */
 	async execute({ cep }) {
 		const cepFormatted = cep.replace(/[^0-9]/g, '')
 
