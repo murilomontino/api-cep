@@ -9,16 +9,16 @@ const data = {
 	uf: 'SP',
 }
 
-async function ShouldSetCache() {
-	const cep = '01001-000'
-	const response = await SetterCacheUseCase.execute(cep, data)
-	return response.isLeft()
-}
-
 async function ShouldNotFoundCache() {
 	const cep = '01001-000'
 	const result = await GetterCacheUseCase.execute(cep)
 	return result.isRight()
+}
+
+async function ShouldSetCache() {
+	const cep = '01001-000'
+	const response = await SetterCacheUseCase.execute(cep, data)
+	return response.isLeft()
 }
 
 async function ShouldFoundCache() {
