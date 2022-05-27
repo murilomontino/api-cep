@@ -2,8 +2,6 @@ const InvalidCEP = require('../../../../adapters/errors/invalid-cep')
 const Either = require('../../../../shared/either')
 
 class ValidateCEPUseCase {
-	constructor() {}
-
 	/**
 	 * @param {{
 	 * 	cep: string
@@ -11,16 +9,16 @@ class ValidateCEPUseCase {
 	 * @return {Promise<Either.typeLeft | Either.typeRight>}
 	 */
 	async execute({ cep }) {
-		const cepFormatted = cep.replace(/[^0-9]/g, '')
-		const regex = /^[0-9]{8}$/
+		const regexOne = /^[0-9]{8}$/
+		const regexTwo = /^[0-9]{5}-[0-9]{3}$/
 
-		if (!regex.test(cepFormatted)) {
-			return Either.Right(new InvalidCEP())
+		if (regexOne.test(cep) || regexTwo.test(cep)) {
+			return Either.Left({
+				message: 'CEP Válido',
+			})
 		}
 
-		return Either.Left({
-			message: 'CEP Válido',
-		})
+		return Either.Right(new InvalidCEP())
 	}
 }
 

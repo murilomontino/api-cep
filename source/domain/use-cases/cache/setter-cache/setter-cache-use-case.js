@@ -9,7 +9,9 @@ class SetterCache {
 	 * @returns {Promise<Either.typeLeft | Either.typeRight>}
 	 */
 	static async execute(key, value) {
-		const keyFormatted = key.replace(/"[^0-9a-zA-Z]/g, '')
+		// remover caracteres especiais
+		const regex = /[^0-9a-zA-Z]/g
+		const keyFormatted = key.replace(regex, '')
 
 		try {
 			NodeCache.set(keyFormatted, value, 300)
