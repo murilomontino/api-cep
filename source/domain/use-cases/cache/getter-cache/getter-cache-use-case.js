@@ -8,7 +8,9 @@ class GetterCache {
 	 * @returns {Promise<Either.typeLeft | Either.typeRight>}
 	 */
 	static async execute(key) {
-		const keyFormatted = key.replace(/"[^0-9a-zA-Z]/g, '')
+		// remover caracteres especiais
+		const regex = /[^0-9a-zA-Z]/g
+		const keyFormatted = key.replace(regex, '')
 
 		const cache = await NodeCache.get(keyFormatted)
 
